@@ -38,33 +38,46 @@ public abstract class Player {
         this.score = new Score(this);
     }
     
-    
+    /**
+     * Adds a card to the player's deck.
+     * @param card Card to add.
+     */
     public void addCard(Card card) {
         this.cardList.add(card);
     }
     
-    
+    /**
+     * Removes a card from the player deck.
+     * @param card Card to be removed.
+     */
     public void removeCard(Card card) {
         this.cardList.remove(card);
     }
     
-    
+    /**
+     * Remove more than one card from the player.
+     * @param cards Cards to remove.
+     */
     public void removeCards(PlayedCards cards) {
         for (int i = 0; i < cards.getCount(); i++) {
             this.cardList.remove(cards.getCard(i));
         }
     }
     
-    
+    /**
+     * Clears the player's card list.
+     */
     public void emptyCardList() {
         this.cardList.clear();
     }
     
-    
+    /**
+     * Checks if the player has cards.
+     * @return True if the player has one card or more.
+     */
     public boolean hasCards() {
         return !this.cardList.isEmpty();
     }
-    
     
     /**
      * Returns the amount of cards the player possesses.
@@ -74,7 +87,11 @@ public abstract class Player {
         return this.cardList.size();
     }
     
-    
+    /**
+     * Sends the x best cards to another player.
+     * @param player Player who will receive the cards.
+     * @param amount Amount of cards that will be sent.
+     */
     public void sendBestCardsToPlayer(Player player, Integer amount) {
         
         for (int i = 0; i < amount; i++) {
@@ -95,20 +112,32 @@ public abstract class Player {
         
     }
     
-    
+    /**
+     * Sends a card to a player.
+     * @param player Receiver of the card.
+     * @param card Card that will be sent.
+     */
     public void sendCard(Player player, Card card) {
         this.removeCard(card);
         player.addCard(card);
     }
     
-    
+    /**
+     * Sends a certain amount of cards to a player.
+     * @param player Receiver of the cards.
+     * @param cards Cards that will be sent.
+     */
     private void sendCards(Player player, ArrayList<Card> cards) {
         for (Card card : cards) {
             this.sendCard(player, card);
         }
     }
     
-    
+    /**
+     * Sends some chosen cards to a player.
+     * @param player Receiver of the cards.
+     * @param expectedNbCards Expected number of cards that need to be sent.
+     */
     public void sendChosenCardsToPlayer(Player player, Integer expectedNbCards) {
         
         ArrayList<Card> chosenCards = this.chooseCardsToSendToPlayer(expectedNbCards);
@@ -128,7 +157,11 @@ public abstract class Player {
         
     }
     
-    
+    /**
+     * Sends random cards to a player.
+     * @param player Receiver of the cards.
+     * @param expectedNbCards Expected number of cards that will be sent.
+     */
     private void sendRandomCards(Player player, Integer expectedNbCards) {
         System.err.println("Invalid cards. Random cards will be sent.");
         int addedCards = 0;
@@ -152,16 +185,21 @@ public abstract class Player {
         
     }
 
-    
+    /**
+     * Updates the player score.
+     * @param playerList List of player that took part in the game.
+     */
     public void updatePoints(ArrayList<Player> playerList) {
         this.score.updatePoints(playerList);
     }
     
-    
+    /**
+     * Getter on the card list.
+     * @return Card list. 
+     */
     protected ArrayList<Card> getCardList() {
         return cardList;
     }
-    
     
     @Override
     public String toString() {

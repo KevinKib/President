@@ -97,7 +97,9 @@ public class Game {
         
     }
     
-    
+    /**
+     * Setups the different paramaters and variables of the game.
+     */
     private void setupGame() {
         this.nbPlayers = playerList.size();
         this.cardPile.clear();
@@ -116,7 +118,6 @@ public class Game {
             player.setTurnPassed(false);
         }
     }
-    
     
     /**
      * Distributes the cards.
@@ -206,7 +207,9 @@ public class Game {
         stronger.sendChosenCardsToPlayer(weaker, nbCards);
     }
     
-    
+    /**
+     * Defines the new titles of the differents player (president / dirt).
+     */
     private void defineNewTitles() {
         
         for (Player player : this.playerList) {
@@ -232,7 +235,9 @@ public class Game {
         
     }
     
-    
+    /**
+     * Displays the results of the game.
+     */
     private void displayResults() {
         write("");
         for (Player player : playerList) {
@@ -240,8 +245,7 @@ public class Game {
         }
         write("");
     }
-    
-    
+     
     private void addPoints() {
         Integer worstRank = this.nbPlayers;
         for (Player player : this.playerList) {
@@ -252,7 +256,9 @@ public class Game {
         }
     }
     
-    
+    /**
+     * Displays the score of the players.
+     */
     public void displayPoints() {
         write("");
         double elosum = 0.0;
@@ -331,7 +337,6 @@ public class Game {
         
     }
     
-    
     /**
      * Updates the player who will effectuate his turn.
      */
@@ -380,7 +385,10 @@ public class Game {
         }
     }
     
-    
+    /**
+     * Writes in the console, depending if it's allowed or not.
+     * @param string String to write in the console.
+     */
     private void write(String string) {
         if (this.textDisplay) {
             System.out.println(string);
