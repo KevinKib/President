@@ -25,6 +25,7 @@ public abstract class Player {
     private Integer gameRank;
     private Integer points;
     private Score score;
+    private PlayedCards lastPlayedCards;
     
     
     public Player(String name, Restricter restricter) {
@@ -36,6 +37,7 @@ public abstract class Player {
         this.gameRank = null;
         this.points = 0;
         this.score = new Score(this);
+        this.lastPlayedCards = null;
     }
     
     /**
@@ -199,6 +201,18 @@ public abstract class Player {
      */
     protected ArrayList<Card> getCardList() {
         return cardList;
+    }
+    
+    /**
+     * Returns true if when the player finished playing, his last card wasn't a 2.
+     * @return True if the player ended the game correctly.
+     */
+    public boolean isFinishValid() {
+        return !this.hasCards() && !(this.lastPlayedCards.getCount() == 2);
+    }
+    
+    public void updateLastPlayedCards(PlayedCards playedCards) {
+        this.lastPlayedCards = playedCards;
     }
     
     @Override

@@ -41,7 +41,7 @@ public class AI_Random extends Player {
         }
         
         for (Card card : this.getCardList()) {
-            if (card.getValue() == playedCards.getValue() && card.getSuit() != playedCards.getCard(0).getSuit()) {
+            if (card.getValue().equals(playedCards.getValue()) && card.getSuit() != playedCards.getCard(0).getSuit()) {
                 try {
                     playedCards.addCard(card);
                 } catch (InvalidCardException e) {

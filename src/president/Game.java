@@ -104,18 +104,16 @@ public class Game {
         this.nbPlayers = playerList.size();
         this.cardPile.clear();
         
-        // The dirt will be the first player to play, otherwise it's random.
+        // The lowest dirt will be the first player to play, otherwise it's random.
         Player lowestDirt = this.findPlayerWithTitle(Title.LowestDirt);
         if (lowestDirt == null) {
             Random r = new Random();
             int low = 0;
             int high = nbPlayers;
             this.currentIndex = r.nextInt(high-low)+low;
-            System.out.println("NO DIRT");
         }
         else {
             this.currentIndex = this.getIndex(lowestDirt);
-            System.out.println("DIRT !"+this.playerList.get(this.currentIndex));
         }
         this.shutUp = false;
         this.replay = false;
@@ -363,6 +361,7 @@ public class Game {
         if ((playedCards != null && playedCards.getCount() > 0) && (!shutUp || playedCards.getValue().equals(this.cardPile.getValue()))) {
             this.cardPile.addCard(playedCards);
             this.currentPlayer.removeCards(playedCards);
+            this.currentPlayer.updateLastPlayedCards(playedCards);
         }
         else {
             throw new InvalidCardException();
