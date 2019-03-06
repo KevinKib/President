@@ -37,7 +37,7 @@ public class President {
         playerList.add(p3);
         playerList.add(p4);
         
-        int nbIterations = 1;
+        int nbIterations = 3;
         
         for (int i = 0; i < nbIterations; i++) {
             game.play(); 

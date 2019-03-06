@@ -79,7 +79,7 @@ public class Game {
         
         CHOSES A IMPLEMENTER :
         - Cartes extra données au hasard
-        - Le trouduc commence a jouer
+        X Le trouduc commence a jouer
         - Révolution
         - Si on finit par un 2, on perd
      */
@@ -104,11 +104,19 @@ public class Game {
         this.nbPlayers = playerList.size();
         this.cardPile.clear();
         
-        Random r = new Random();
-        int low = 0;
-        int high = nbPlayers;
-        this.currentIndex = r.nextInt(high-low)+low;
-        
+        // The dirt will be the first player to play, otherwise it's random.
+        Player lowestDirt = this.findPlayerWithTitle(Title.LowestDirt);
+        if (lowestDirt == null) {
+            Random r = new Random();
+            int low = 0;
+            int high = nbPlayers;
+            this.currentIndex = r.nextInt(high-low)+low;
+            System.out.println("NO DIRT");
+        }
+        else {
+            this.currentIndex = this.getIndex(lowestDirt);
+            System.out.println("DIRT !"+this.playerList.get(this.currentIndex));
+        }
         this.shutUp = false;
         this.replay = false;
         this.nbFinishedPlayers = 0;
@@ -393,6 +401,40 @@ public class Game {
         if (this.textDisplay) {
             System.out.println(string);
         }
+    }
+    
+    /**
+     * Finds the player with one specific title, if there's any.
+     * @param title Title that we're looking for.
+     * @return Player with the dirt title, or null if there's not.
+     */
+    private Player findPlayerWithTitle(Title title) {
+        Player dirt = null;
+        for (Player player : playerList) {
+            if (player.getTitle() == title) {
+                dirt = player;
+                break;
+            }
+        }
+        return dirt;
+    }
+    
+    /**
+     * Returns the index of a specific player, and null if there's none.
+     * @param player Player we want the index of.
+     * @return The index of the player, null if there's none.
+     */
+    private Integer getIndex(Player player) {
+        Integer index = null;
+        
+        for (int i = 0; i < playerList.size(); i++) {
+            if (this.playerList.get(i).equals(player)) {
+                index = i;
+                break;
+            }
+        }
+        
+        return index;
     }
     
     // --------------
