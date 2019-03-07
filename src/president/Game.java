@@ -83,7 +83,7 @@ public class Game {
         - Cartes extra données au hasard
         X Le trouduc commence a jouer
         - Révolution
-        - Si on finit par un 2, on perd
+        X Si on finit par un 2, on perd
      */
     public void play() {
         
