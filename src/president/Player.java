@@ -208,7 +208,7 @@ public abstract class Player {
      * @return True if the player ended the game correctly.
      */
     public boolean isFinishValid() {
-        return !this.hasCards() && !(this.lastPlayedCards.getCount() == 2);
+        return !this.hasCards() && !(this.lastPlayedCards.getValue() == 2);
     }
     
     public void updateLastPlayedCards(PlayedCards playedCards) {

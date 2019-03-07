@@ -30,6 +30,7 @@ public class Game {
     private Integer nbFinishedPlayers;
     private Restricter restricter;
     private boolean textDisplay;
+    private Integer nbMistakenPlayers;
     
     public Game(ArrayList<Player> playerList) {
         this.playerList = playerList;
@@ -41,6 +42,7 @@ public class Game {
         this.shutUp = false;
         this.replay = false;
         this.nbFinishedPlayers = 0;
+        this.nbMistakenPlayers = 0;
         this.restricter = new Restricter(this, cardPile);
         this.textDisplay = true;
     }
@@ -102,6 +104,7 @@ public class Game {
      */
     private void setupGame() {
         this.nbPlayers = playerList.size();
+        this.nbMistakenPlayers = 0;
         this.cardPile.clear();
         
         // The lowest dirt will be the first player to play, otherwise it's random.
@@ -219,10 +222,13 @@ public class Game {
     private void defineNewTitles() {
         
         for (Player player : this.playerList) {
-            if (player.getGameRank() == null || player.getGameRank() == 4) {
-                // If Java sees the null condition first, he won't evaluate
-                // the next condition. This allows the program to not crash.
-                player.setGameRank(nbPlayers);
+            
+            if (player.getGameRank() == null) {
+                player.setGameRank(nbPlayers-nbMistakenPlayers);
+            }
+            
+            
+            if (player.getGameRank().equals(nbPlayers)) {
                 player.setTitle(Title.LowestDirt);
             }
             else if (player.getGameRank() == 1) {
@@ -336,8 +342,16 @@ public class Game {
         } while (replay && this.currentPlayer.hasCards());
         
         if (!this.currentPlayer.hasCards()) {
-            nbFinishedPlayers++;
-            this.currentPlayer.setGameRank(nbFinishedPlayers);
+            
+            if (this.currentPlayer.isFinishValid()) {
+                nbFinishedPlayers++;
+                this.currentPlayer.setGameRank(nbFinishedPlayers);
+            }
+            else {
+                this.currentPlayer.setGameRank(nbPlayers-nbMistakenPlayers);
+                nbMistakenPlayers++;
+                write(this.currentPlayer+" had a wrong finish.");
+            }
             write(this.currentPlayer+" finished at rank "+this.currentPlayer.getGameRank()+".");
         }
         
