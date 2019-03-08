@@ -64,6 +64,10 @@ public class Game {
      */
     private Restricter restricter;
     
+    /**
+     * Constructor of the Game class.
+     * @param playerList List of the players that will take part into the game.
+     */
     public Game(ArrayList<Player> playerList) {
         this.playerList = playerList;
         this.nbPlayers = playerList.size();
@@ -118,23 +122,54 @@ public class Game {
      */
     public void play() {
         
-        this.setupGame();
-        this.distributeCards();
-        this.exchangeCards();
-        while (this.isPlaying()) {
-            this.turn();
+        try {
+            this.setupGame();
+            this.distributeCards();
+            this.exchangeCards();
+            while (this.isPlaying()) {
+                this.turn();
+            }
+            this.defineNewTitles();
+            this.displayResults();
+            this.addPoints();
         }
-        this.defineNewTitles();
-        this.displayResults();
-        this.addPoints();
+        catch (NotEnoughPlayersException e) {
+            Console.error("A game must include two or more players.");
+        }
+        
+    }
+    
+    /**
+     * Displays the score of the players.
+     */
+    public void displayPoints() {
+        Console.write("");
+        double elosum = 0.0;
+        for (Player player : playerList) {
+            //write(". "+player+" got "+player.getScore().getPreciseElo()+" elo.");
+            elosum += player.getScore().getPreciseElo();
+        }
+        
+        
+        elosum /= this.nbPlayers;
+        
+        
+        Console.write("elosum:"+elosum);
+        Console.write("");
+        for (Player player : playerList) {
+            //write(". "+player+" got "+player.getScore().getNormal()+" points.");
+            Console.write(". "+player+" got "+player.getScore().getElo()+" elo.");
+        }
         
     }
     
     /**
      * Setups the different paramaters and variables of the game.
      */
-    private void setupGame() {
+    private void setupGame() throws NotEnoughPlayersException {
         this.nbPlayers = playerList.size();
+        if (!(this.nbPlayers >= 2)) throw new NotEnoughPlayersException();
+        
         this.nbMistakenPlayers = 0;
         this.cardPile.clear();
         
@@ -289,6 +324,9 @@ public class Game {
         Console.write("");
     }
      
+    /**
+     * Updates the points of the players.
+     */
     private void addPoints() {
         Integer worstRank = this.nbPlayers;
         for (Player player : this.playerList) {
@@ -298,31 +336,6 @@ public class Game {
             player.getScore().updateElo();
         }
     }
-    
-    /**
-     * Displays the score of the players.
-     */
-    public void displayPoints() {
-        Console.write("");
-        double elosum = 0.0;
-        for (Player player : playerList) {
-            //write(". "+player+" got "+player.getScore().getPreciseElo()+" elo.");
-            elosum += player.getScore().getPreciseElo();
-        }
-        
-        
-        elosum /= this.nbPlayers;
-        
-        
-        Console.write("elosum:"+elosum);
-        Console.write("");
-        for (Player player : playerList) {
-            //write(". "+player+" got "+player.getScore().getNormal()+" points.");
-            Console.write(". "+player+" got "+player.getScore().getElo()+" elo.");
-        }
-        
-    }
-    
     
     // --------------
     
@@ -401,7 +414,11 @@ public class Game {
         } while(!this.currentPlayer.hasCards() && !this.currentPlayer.isTurnPassed());
     }
     
-    
+    /**
+     * Actually plays the cards chosen by the current players.
+     * @param playedCards Cards played by the current player.
+     * @throws InvalidCardException 
+     */
     private void playPlayerCards(PlayedCards playedCards) throws InvalidCardException {
         if ((playedCards != null && playedCards.getCount() > 0) && (!shutUp || playedCards.getValue().equals(this.cardPile.getValue()))) {
             this.cardPile.addCard(playedCards);
@@ -413,7 +430,11 @@ public class Game {
         }
 }
     
-    
+    /**
+     * Manages the special card properties, i.e the 2 card properties
+     * or the shut up properties.
+     * @param playedCards Last played cards.
+     */
     private void specialCardProperties(PlayedCards playedCards) {
         boolean resetPile = playedCards.getName().equals("2")
                             || cardPile.getStreakValue() >= 4;
@@ -426,7 +447,10 @@ public class Game {
         }
     }
     
-    
+    /**
+     * Clears the card pile.
+     * @param _replay Whether the current player is allowed to replay or not.
+     */
     private void resetPile(boolean _replay) {
         Console.write("Pile reset.\n");
         this.cardPile.clear();
@@ -473,7 +497,11 @@ public class Game {
     
     // --------------
     
-    
+    /**
+     * Returns whether all players passed their turn,
+     * which triggers a pile reset.
+     * @return True if all players passed their turns.
+     */
     private boolean allTurnsPassed() {
         Integer nbPassedTurns = 0;
         for (Player player : this.playerList) {
@@ -484,7 +512,6 @@ public class Game {
         
         return nbPassedTurns >= this.nbPlayers-1;
     }
-    
     
     /**
      * Tells if the game is still going.
@@ -502,12 +529,18 @@ public class Game {
         return (nbPlayersPlaying > 1);
     }
 
-    
+    /**
+     * Returns whether the game is in a "shut up" state or not.
+     * @return Whether the game is in a "shut up" state or not.
+     */
     public boolean isShutUp() {
         return shutUp;
     }
 
-    
+    /**
+     * Returns the restricter object of the game.
+     * @return Restricter object of the game.
+     */
     public Restricter getRestricter() {
         return restricter;
     }

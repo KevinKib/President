@@ -7,8 +7,8 @@ package president;
 
 /**
  *
- * @author Kévin
+ * @author maxim
  */
-public class InvalidCardException extends Exception {
+public class NotEnoughPlayersException extends Exception {
     
 }

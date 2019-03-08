@@ -30,10 +30,10 @@ public class President {
         Player p3 = new AI_Random("random1", game.getRestricter());
         Player p4 = new AI_Random("random2", game.getRestricter());
         
-        playerList.add(p1);
-        playerList.add(p2);
-        playerList.add(p3);
-        playerList.add(p4);
+        //playerList.add(p1);
+        //playerList.add(p2);
+        //playerList.add(p3);
+        //playerList.add(p4);
         
         int nbIterations = 10000;
         

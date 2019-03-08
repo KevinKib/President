@@ -14,12 +14,22 @@ public class Console {
     private static boolean textDisplay = true;
     
     /**
-     * Writes in the console, depending if it's allowed or not.
+     * Writes a classic message in the console, depending if it's allowed or not.
      * @param string String to write in the console.
      */
     public static void write(String string) {
         if (textDisplay) {
             System.out.println(string);
+        }
+    }
+    
+    /**
+     * Writes an error message in the console, depending if it's allowed or not.
+     * @param string String to write in the console.
+     */
+    public static void error(String string) {
+        if (textDisplay) {
+            System.err.println(string);
         }
     }
     
