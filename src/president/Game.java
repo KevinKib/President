@@ -29,7 +29,6 @@ public class Game {
     private boolean replay;
     private Integer nbFinishedPlayers;
     private Restricter restricter;
-    private boolean textDisplay;
     private Integer nbMistakenPlayers;
     
     public Game(ArrayList<Player> playerList) {
@@ -44,7 +43,6 @@ public class Game {
         this.nbFinishedPlayers = 0;
         this.nbMistakenPlayers = 0;
         this.restricter = new Restricter(this, cardPile);
-        this.textDisplay = true;
     }
     
     
@@ -251,11 +249,11 @@ public class Game {
      * Displays the results of the game.
      */
     private void displayResults() {
-        write("");
+        Console.write("");
         for (Player player : playerList) {
-            write(". "+player+" raced rank "+player.getGameRank()+".");
+            Console.write(". "+player+" raced rank "+player.getGameRank()+".");
         }
-        write("");
+        Console.write("");
     }
      
     private void addPoints() {
@@ -272,7 +270,7 @@ public class Game {
      * Displays the score of the players.
      */
     public void displayPoints() {
-        write("");
+        Console.write("");
         double elosum = 0.0;
         for (Player player : playerList) {
             //write(". "+player+" got "+player.getScore().getPreciseElo()+" elo.");
@@ -283,11 +281,11 @@ public class Game {
         elosum /= this.nbPlayers;
         
         
-        write("elosum:"+elosum);
-        write("");
+        Console.write("elosum:"+elosum);
+        Console.write("");
         for (Player player : playerList) {
             //write(". "+player+" got "+player.getScore().getNormal()+" points.");
-            write(". "+player+" got "+player.getScore().getElo()+" elo.");
+            Console.write(". "+player+" got "+player.getScore().getElo()+" elo.");
         }
         
     }
@@ -316,17 +314,17 @@ public class Game {
                     player.setTurnPassed(false);
                 }
                 
-                write(this.currentPlayer+" played "+playedCards+".");
+                Console.write(this.currentPlayer+" played "+playedCards+".");
                 specialCardProperties(playedCards);
                 
                 
             } catch (InvalidCardException e) {
                 if (!this.shutUp) {
                     this.currentPlayer.setTurnPassed(true);
-                    write(this.currentPlayer+" passed his turn.");
+                    Console.write(this.currentPlayer+" passed his turn.");
                 }
                 else {
-                    write(this.currentPlayer+" got shut up.");
+                    Console.write(this.currentPlayer+" got shut up.");
                 }
                 
                 this.shutUp = false;
@@ -350,9 +348,9 @@ public class Game {
             else {
                 this.currentPlayer.setGameRank(nbPlayers-nbMistakenPlayers);
                 nbMistakenPlayers++;
-                write(this.currentPlayer+" had a wrong finish.");
+                Console.write(this.currentPlayer+" had a wrong finish.");
             }
-            write(this.currentPlayer+" finished at rank "+this.currentPlayer.getGameRank()+".");
+            Console.write(this.currentPlayer+" finished at rank "+this.currentPlayer.getGameRank()+".");
         }
         
     }
@@ -397,22 +395,12 @@ public class Game {
     
     
     private void resetPile(boolean _replay) {
-        write("Pile reset.\n");
+        Console.write("Pile reset.\n");
         this.cardPile.clear();
         replay = _replay;
         this.shutUp = false;
         for (Player player : this.playerList) {
             player.setTurnPassed(false);
-        }
-    }
-    
-    /**
-     * Writes in the console, depending if it's allowed or not.
-     * @param string String to write in the console.
-     */
-    private void write(String string) {
-        if (this.textDisplay) {
-            System.out.println(string);
         }
     }
     
@@ -490,18 +478,5 @@ public class Game {
     public Restricter getRestricter() {
         return restricter;
     }
-
-    
-    public boolean isTextDisplay() {
-        return textDisplay;
-    }
-
-    
-    public void setTextDisplay(boolean textDisplay) {
-        this.textDisplay = textDisplay;
-    }
-    
-    
-    
     
 }

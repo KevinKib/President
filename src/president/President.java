@@ -23,7 +23,7 @@ public class President {
         
         ArrayList<Player> playerList = new ArrayList<>();
         Game game = new Game(playerList);
-        game.setTextDisplay(true);
+        Console.setTextDisplay(false);
         
         
         Player p1 = new AI_Basic("player1", game.getRestricter());
@@ -37,13 +37,13 @@ public class President {
         playerList.add(p3);
         playerList.add(p4);
         
-        int nbIterations = 3;
+        int nbIterations = 10000;
         
         for (int i = 0; i < nbIterations; i++) {
             game.play(); 
         }
         
-        game.setTextDisplay(true);
+        Console.setTextDisplay(true);
         game.displayPoints();
     }
 }

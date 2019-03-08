@@ -5,15 +5,25 @@
             <url>src/president/Player.java</url>
             <bookmark id="1">
                 <name/>
-                <line>206</line>
+                <line>258</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kévin/Documents/NetBeansProjects/President/src/president/President.java</file>
-            <file>file:/C:/Users/Kévin/Documents/NetBeansProjects/President/src/president/Player.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/AI/AI_Random.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Player.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/AI/AI_Basic.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Title.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Cards/Suit.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Restricter.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/AI/Human.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Cards/Packs/CardSet.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Game.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Cards/Packs/CardFactory.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/President.java</file>
+            <file>file:/C:/Users/maxim/Desktop/GitHub/President/src/president/Cards/Packs/CardPile.java</file>
         </group>
     </open-files>
 </project-private>
