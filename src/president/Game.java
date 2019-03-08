@@ -111,10 +111,10 @@ public class Game {
         
         
         CHOSES A IMPLEMENTER :
-        - Cartes extra données au hasard
+        X Cartes extra données au hasard
         X Le trouduc commence a jouer
-        - Révolution
         X Si on finit par un 2, on perd
+        - Révolution
      */
     public void play() {
         
@@ -174,7 +174,7 @@ public class Game {
         
         Integer nbCards = this.cardSet.getCards().size();
         Integer distributedCards = 0;
-        
+
         // Distribute all cards
         // To change here : randomize the last cards
         for (Card card : this.cardSet.getCards()) {
