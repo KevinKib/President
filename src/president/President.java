@@ -25,12 +25,10 @@ public class President {
         Game game = new Game(playerList);
         Console.setTextDisplay(false);
         
-        
         Player p1 = new AI_Basic("player1", game.getRestricter());
         Player p2 = new AI_Basic("player2", game.getRestricter());
         Player p3 = new AI_Random("random1", game.getRestricter());
         Player p4 = new AI_Random("random2", game.getRestricter());
-        
         
         playerList.add(p1);
         playerList.add(p2);

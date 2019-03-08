@@ -19,17 +19,50 @@ import president.Cards.Packs.CardPile;
  */
 public class Game {
     
+    /**
+     * Number of players in the current game.
+     */
     private Integer nbPlayers;
+    /**
+     * List of the different players that take part in the game.
+     */
     private ArrayList<Player> playerList;
+    /**
+     * Set of cards where players pick their cards from.
+     */
     private CardSet cardSet;
+    /**
+     * Pile of cards that's being played upon during the game.
+     */
     private CardPile cardPile;
+    /**
+     * Current player of the turn.
+     */
     private Player currentPlayer;
+    /**
+     * Index of the current player.
+     */
     private Integer currentIndex;
+    /**
+     * Whether the game is in a "shut up" state or not.
+     */
     private boolean shutUp;
+    /**
+     * Whether the current player is allowed to play again or not.
+     */
     private boolean replay;
+    /**
+     * Number of player that finished the game.
+     */
     private Integer nbFinishedPlayers;
-    private Restricter restricter;
+    /**
+     * Number of players that had a wrong finish (i.e that finished with a 2).
+     */
     private Integer nbMistakenPlayers;
+    /**
+     * Restricter used for AIs.
+     */
+    private Restricter restricter;
     
     public Game(ArrayList<Player> playerList) {
         this.playerList = playerList;
